@@ -1,0 +1,3 @@
+class CuentaCorriente extends Cuenta {
+    
+}
