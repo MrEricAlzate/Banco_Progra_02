@@ -3,21 +3,18 @@ public class Main {
 
         Cuenta banco = new Cuenta("0000000000", "Banco", "2024", "Activo");
 
-        Cuenta c1 = new Cuenta("1234567890", "Eric", "2024-01-01", "Activa");
-        Cuenta c2 = new Cuenta("0987654321", "Ana", "2024-02-01", "Activa");
+        CuentaAhorros ahorros = new CuentaAhorros(
+                "1111111111",
+                "Eric",
+                "2024-03-01",
+                "Activa",
+                10000);
 
-        banco.agregarCuenta(c1);
-        banco.agregarCuenta(c2);
+        banco.agregarCuenta(ahorros);
 
-        c1.infoCuenta();
+        System.out.println(ahorros); // Para mostrar los datos de la cuenta
+        // Cuenta.mostrarCuentas(); Este es para mostrar todos los datos de la cuenta
 
-        boolean eliminada = banco.eliminarCuenta("1234567890");
-
-        if (eliminada) {
-            System.out.println("Cuenta eliminada correctamente");
-        } else {
-            System.out.println("Cuenta no encontrada");
-        }
+        System.out.println("Saldo: $" + ahorros.getSaldo());
     }
 }
-

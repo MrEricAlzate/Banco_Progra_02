@@ -23,12 +23,42 @@ public class Cuenta implements Banco {
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
+public String getTitular() {
+    return titular;
+}
 
-    public void infoCuenta()  {
-        System.out.println("Titular de la cuenta: " + titular);
-        System.out.println("Fecha Apertura: " + fechaApertura);
-        System.out.println("Estado de la cuenta: " + estado);
+public double getSaldo() {
+    return saldo;
+}
+
+public String getFechaApertura() {
+    return fechaApertura;
+}
+
+public String getEstado() {
+    return estado;
+}
+public static void mostrarCuentas() {
+    for (Cuenta c : cuentas) {
+        System.out.println(c);
     }
+}
+
+
+    public void depositar(double monto) {
+    if (monto > 0) {
+        saldo += monto;
+    }
+}
+
+public boolean retirar(double monto) {
+    if (monto > 0 && saldo >= monto) {
+        saldo -= monto;
+        return true;
+    }
+    return false;
+}
+
 
     @Override
     public void agregarCuenta(Cuenta cuenta) {
@@ -45,4 +75,15 @@ public class Cuenta implements Banco {
         }
         return false;
     }
+    @Override
+public String toString() {
+    return "Cuenta {" +
+           "Numero = '" + numeroCuenta + '\'' +
+           ", Titular = '" + titular + '\'' +
+           ", Saldo = $" + saldo +
+           ", Fecha Apertura = '" + fechaApertura + '\'' +
+           ", Estado = '" + estado + '\'' +
+           '}';
+}
+
 }
