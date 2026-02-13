@@ -26,12 +26,15 @@ public CuentaAhorros(String numeroCuenta, String titular,
         saldo += interesMensual;
     }
 
-    @Override
-    public boolean retirar(double monto) {
-        if (monto > 0 && saldo - monto >= 0) {  //aca no permite el sobregiro
-            saldo -= monto;
-            return true;
-        }
+@Override
+public boolean retirar(double monto) {
+    if (monto > 0 && saldo - monto >= SALDO_MINIMO) {
+        saldo -= monto;
+        return true;
+    } else {
+        System.out.println("Retiro rechazado: debe mantener el saldo mínimo de $" + SALDO_MINIMO);
         return false;
     }
+}
+
 }
