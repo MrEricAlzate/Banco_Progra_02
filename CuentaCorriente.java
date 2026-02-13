@@ -9,28 +9,32 @@ public class CuentaCorriente extends Cuenta {
             String fechaApertura, String estado, double saldoActual, double sobregiro) {
 
         super(numeroCuenta, titular, fechaApertura, estado);
-        if (saldoActual >= 0) {
-            this.saldo = saldoActual;
+        saldo = saldoActual - sobregiro;
+        if (saldo>=-LIMITE_SOBREGIRO){
+            this.estado = "Saldo negativo";
+            cobrointeressobregiromensual();
+            cobrocomisionfija();
+        }
+        if (saldo >= 0) {
             this.estado = "Saldo positivo";
             cobrocomisionfija();
-            if (sobregiro > LIMITE_SOBREGIRO) {
-                this.saldo = -sobregiro;
-                this.estado = "Saldo negativo";
-                cobrointeressobregiromensual();
-                System.out.println("Se paso del limite del sobregiro, su cuenta quedara en negativo");
-            }
-
+                if (saldo <-LIMITE_SOBREGIRO){
+                    this.estado= "Saldo negativo";
+                    cobrocomisionfija();
+                    System.out.println("Excede el limite de sobregiro, transacción rechazada");
+                }
         }
 
     }
 
     public void cobrocomisionfija() {
-        double comisionfija = saldo - (COMISION_MENSUAL_FIJA);
-        saldo += comisionfija;
+
+        saldo -= COMISION_MENSUAL_FIJA;
     }
 
     public void cobrointeressobregiromensual() {
         double interessobregiro = saldo * (INTERES_SOBREGIRO_MENSUAL);
+        saldo += interessobregiro;
 
     }
 }
